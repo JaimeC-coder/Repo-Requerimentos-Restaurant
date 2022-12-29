@@ -15,12 +15,10 @@
                         <span class="card-title">Create Document</span>
                     </div>
                     <div class="card-body">
-                        {!! form::open(['route' => 'documents.store', 'files' => true]) !!}
-
+                        {!!Form::open(['route' => ['documents.store']]) !!}
                         @csrf
-
                         @include('documents.form')
-                        {!! Form::close() !!}
+                        {!! form::close() !!}
                     </div>
                 </div>
             </div>

@@ -30,8 +30,8 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        $document = new Document();
-        return view('documents.create', compact('document'));
+
+        return view('documents.create');
     }
 
     /**
@@ -43,8 +43,11 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         request()->validate(Document::$rules);
-
-        $document = Document::create($request->all());
+        $document = Document::create(
+            [
+                'name' => strtoupper($request->name)
+            ]
+        );
 
         return redirect()->route('documents.index')
             ->with('success', 'Document created successfully.');

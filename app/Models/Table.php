@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * Class Table
  *
  * @property $id
+ * @property $name
+ * @property $status
  * @property $created_at
  * @property $updated_at
  *
@@ -20,6 +22,8 @@ class Table extends Model
 {
     
     static $rules = [
+		'name' => 'required',
+		'status' => 'required',
     ];
 
     protected $perPage = 20;
@@ -29,7 +33,7 @@ class Table extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['name','status'];
 
 
     /**

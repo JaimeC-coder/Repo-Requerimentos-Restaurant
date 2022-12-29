@@ -332,7 +332,7 @@ return [
         ['header' => 'PRODUCTS'],
         [
             'text' => 'Tables',
-            'url'  => '/',
+            'route'  => 'tables.index',
             'icon'    => 'fas fa-utensils',
         ],
         [
@@ -373,7 +373,7 @@ return [
         [
             'text'       => 'Documents',
             'icon' => 'fas fa-id-card',
-            'url'        => '#',
+            'route'        => 'documents.index',
         ],
         [
             'text'       => 'Employees',

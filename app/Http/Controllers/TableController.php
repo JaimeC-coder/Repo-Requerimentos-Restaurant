@@ -31,8 +31,8 @@ class TableController extends Controller
      */
     public function create()
     {
-        $table = new Table();
-        return view('table.create', compact('table'));
+
+        return view('table.create');
     }
 
     /**
@@ -42,13 +42,33 @@ class TableController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+
     {
-        request()->validate(Table::$rules);
+        //  return $request->all();
 
-        $table = Table::create($request->all());
+        $table = $request->count;
+        for ($i = 1; $i <= $table; $i++) {
+            Table::firstOrCreate(
+                [
+                    'name' => 'Mesa ' . $i
+                ],
+                [
+                    'name' => 'Mesa ' . $i,
+                    'status' => 'available',
 
+                ]
+            );
+        }
         return redirect()->route('tables.index')
             ->with('success', 'Table created successfully.');
+
+
+        // request()->validate(Table::$rules);
+
+        // $table = Table::create($request->all());
+
+        // return redirect()->route('table.index')
+        //     ->with('success', 'Table created successfully.');
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\TableController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,8 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
     Route::resource('documents', DocumentController::class)->names('documents');
-    
+    Route::resource('tables', TableController::class)->names('tables');
+
 });
 
 
