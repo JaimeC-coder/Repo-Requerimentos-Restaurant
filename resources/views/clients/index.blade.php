@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('template_title')
     Client
@@ -35,7 +35,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Dni</th>
 										<th>Name</th>
 
@@ -46,7 +46,7 @@
                                     @foreach ($clients as $client)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $client->DNI }}</td>
 											<td>{{ $client->name }}</td>
 

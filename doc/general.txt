@@ -2,3 +2,5 @@ ba2ad790f2f5541757e75d7f63a512149dc90da4
 
 en ese archivo se encuentra el todo lo relacionadoa a adminlte que se necesite modificar para mejorar el proyectov
 se encuentrac en la carpeta de storage/views/ba2ad790f2f5541757e75d7f63a512149dc90da4.php
+
+

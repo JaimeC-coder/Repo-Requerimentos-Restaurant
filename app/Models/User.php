@@ -59,6 +59,16 @@ class User extends Authenticatable
         'profile_photo_url'
 
     ];
+    static $rules = [
+        'name' => 'required',
+        'email' => 'required',
+        'password' => 'required',
+    ];
+    //relacion de uno a uno con la tabla employee
+    public function employee()
+    {
+        return $this->hasOne('App\Models\Employee');
+    }
 
     public function adminlte_image()
     {
@@ -80,4 +90,5 @@ class User extends Authenticatable
     {
         return 'key-test';
     }
+
 }

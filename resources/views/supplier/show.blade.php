@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('adminlte::page')
 @section('template_title')
     {{ $supplier->name ?? 'Show Supplier' }}
 @endsection
@@ -19,7 +18,7 @@
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Name:</strong>
                             {{ $supplier->name }}

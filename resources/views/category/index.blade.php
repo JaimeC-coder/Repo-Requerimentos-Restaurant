@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('template_title')
     Category
@@ -35,7 +35,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Name</th>
 										<th>Category Id</th>
 
@@ -46,7 +46,7 @@
                                     @foreach ($categories as $category)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $category->name }}</td>
 											<td>{{ $category->category_id }}</td>
 

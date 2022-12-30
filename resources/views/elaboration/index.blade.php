@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('template_title')
     Elaboration
@@ -35,7 +35,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Cuantity</th>
 										<th>Product Id</th>
 										<th>Employee Id</th>
@@ -47,7 +47,7 @@
                                     @foreach ($elaborations as $elaboration)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $elaboration->cuantity }}</td>
 											<td>{{ $elaboration->product_id }}</td>
 											<td>{{ $elaboration->employee_id }}</td>

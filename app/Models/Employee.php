@@ -24,14 +24,18 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Employee extends Model
 {
-    
-    static $rules = [
+
+    public static $rules = [
 		'DNI' => 'required',
+        'email' => 'required',
+        'password' => 'required',
+        'name' => 'required',
 		'phone' => 'required',
 		'address' => 'required',
-		'city' => 'required',
-		'user_id' => 'required',
+		'city' => 'required'
     ];
+
+
 
     protected $perPage = 20;
 
@@ -50,7 +54,7 @@ class Employee extends Model
     {
         return $this->hasMany('App\Models\Elaboration', 'employee_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -58,7 +62,7 @@ class Employee extends Model
     {
         return $this->hasMany('App\Models\Order', 'employee_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -66,6 +70,6 @@ class Employee extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
-    
+
 
 }

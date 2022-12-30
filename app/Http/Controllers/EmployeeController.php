@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class EmployeeController
@@ -31,8 +33,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $employee = new Employee();
-        return view('employee.create', compact('employee'));
+
+        return view('employee.create');
     }
 
     /**
@@ -43,12 +45,29 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Employee::$rules);
+        request()->validate(
+            Employee::$rules
+        );
 
-        $employee = Employee::create($request->all());
+        DB::transaction(function () use ($request){
+            $NewUser = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
 
+            ]);
+            $NewUser->employee()->create([
+                'DNI' => $request->DNI,
+                'phone' => $request->phone,
+                'address' =>  $request->address,
+                'city' => $request->city,
+            ]);
+
+
+        });
         return redirect()->route('employees.index')
             ->with('success', 'Employee created successfully.');
+
     }
 
     /**

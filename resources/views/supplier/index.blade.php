@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('template_title')
     Supplier
@@ -35,7 +35,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Name</th>
 										<th>Document</th>
 										<th>Representative</th>
@@ -51,7 +51,7 @@
                                     @foreach ($suppliers as $supplier)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $supplier->name }}</td>
 											<td>{{ $supplier->document }}</td>
 											<td>{{ $supplier->representative }}</td>

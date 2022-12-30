@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('template_title')
     Order
@@ -35,7 +35,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Amount</th>
 										<th>Table Id</th>
 										<th>Employee Id</th>
@@ -48,7 +48,7 @@
                                     @foreach ($orders as $order)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $order->amount }}</td>
 											<td>{{ $order->table_id }}</td>
 											<td>{{ $order->employee_id }}</td>

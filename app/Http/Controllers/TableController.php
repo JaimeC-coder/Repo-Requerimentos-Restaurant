@@ -63,12 +63,7 @@ class TableController extends Controller
             ->with('success', 'Table created successfully.');
 
 
-        // request()->validate(Table::$rules);
-
-        // $table = Table::create($request->all());
-
-        // return redirect()->route('table.index')
-        //     ->with('success', 'Table created successfully.');
+       
     }
 
     /**

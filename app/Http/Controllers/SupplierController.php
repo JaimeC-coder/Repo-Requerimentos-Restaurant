@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use App\Models\Document;
 
 /**
  * Class SupplierController
@@ -31,8 +32,8 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        $supplier = new Supplier();
-        return view('supplier.create', compact('supplier'));
+       $documents = Document::all();
+        return view('supplier.create', compact('documents'));
     }
 
     /**

@@ -312,10 +312,7 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
+
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
@@ -323,7 +320,7 @@ return [
         ],
         [
             'text'        => 'Clients',
-            'url'        => '/',
+            'route'        => 'clients.index',
             'icon'        =>  'fas fa-user-plus',
             'label'       =>  '1',
             'label_color' => 'success',
@@ -337,7 +334,7 @@ return [
         ],
         [
             'text' => 'Orders',
-            'url'  => 'admin/settings',
+            'route'  => 'orders.index',
             'icon' => 'fas fa-sticky-note',
         ],
         [
@@ -346,19 +343,19 @@ return [
             'submenu' => [
                 [
                     'text' => 'Products',
-                    'url'  => '#',
+                    'route'  => 'products.index',
                 ],
                 [
                     'text'    => 'Categories',
-                    'url'     => '#',
+                    'route'     => 'categories.index',
                 ],
                 [
                     'text' => 'Tags',
-                    'url' => '#',
+                    'route' => 'tags.index',
                 ],
                 [
                     'text'    => 'Elaborations',
-                    'url'     => '#',
+                    'route'     => 'elaborations.index',
                 ],
 
             ],
@@ -367,8 +364,7 @@ return [
         [
             'text'       => 'supplier',
             'icon' => 'fas fa-truck',
-
-            'url'        => '#',
+            'route'        => 'suppliers.index',
         ],
         [
             'text'       => 'Documents',
@@ -378,7 +374,7 @@ return [
         [
             'text'       => 'Employees',
             'icon' => 'fas fa-users',
-            'url'        => '#',
+            'route'        => 'employees.index',
         ],
     ],
 

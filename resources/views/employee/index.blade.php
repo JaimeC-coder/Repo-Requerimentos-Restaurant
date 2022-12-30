@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('adminlte::page')
 @section('template_title')
     Employee
 @endsection
@@ -35,12 +34,12 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+										<th>Name</th>
+										<th>Email</th>
 										<th>Dni</th>
 										<th>Phone</th>
 										<th>Address</th>
 										<th>City</th>
-										<th>User Id</th>
 
                                         <th></th>
                                     </tr>
@@ -49,12 +48,14 @@
                                     @foreach ($employees as $employee)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
+											<td>{{ $employee->user()->first()->name }}</td>
+											<td>{{ $employee->user()->first()->email }}</td>
 											<td>{{ $employee->DNI }}</td>
 											<td>{{ $employee->phone }}</td>
 											<td>{{ $employee->address }}</td>
 											<td>{{ $employee->city }}</td>
-											<td>{{ $employee->user_id }}</td>
+											 
 
                                             <td>
                                                 <form action="{{ route('employees.destroy',$employee->id) }}" method="POST">
