@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('document')->unique();
-            $table->string('representative');
+            $table->string('representative')->nullable();
             $table->string('address');
             $table->string('phone');
             $table->string('email');

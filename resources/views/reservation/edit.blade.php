@@ -1,6 +1,7 @@
-@extends('adminlte::page')
+@extends('layouts.app')
+
 @section('template_title')
-    Update Document
+    Update Reservation
 @endsection
 
 @section('content')
@@ -12,18 +13,16 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Update Document</span>
+                        <span class="card-title">Update Reservation</span>
                     </div>
                     <div class="card-body">
-                        {!! Form::model($document, ['route' => ['documents.update', $document], 'method' => 'PUT']) !!}
+                        <form method="POST" action="{{ route('reservations.update', $reservation->id) }}"  role="form" enctype="multipart/form-data">
+                            {{ method_field('PATCH') }}
+                            @csrf
 
-                        @include('documents.form')
-                        {!! Form::close() !!}
+                            @include('reservation.form')
 
-
-
-
-                      
+                        </form>
                     </div>
                 </div>
             </div>

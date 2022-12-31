@@ -45,7 +45,8 @@ class DocumentController extends Controller
         request()->validate(Document::$rules);
         $document = Document::create(
             [
-                'name' => strtoupper($request->name)
+                'name' => strtoupper($request->name),
+                'representative'=> $request->representative == '1' ? true : false
             ]
         );
 
@@ -73,6 +74,7 @@ class DocumentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+
     {
         $document = Document::find($id);
 
@@ -88,9 +90,15 @@ class DocumentController extends Controller
      */
     public function update(Request $request, Document $document)
     {
+       // return $request->all();
         request()->validate(Document::$rules);
 
-        $document->update($request->all());
+        $document->update(
+            [
+                'name' => strtoupper($request->name),
+                'representative'=> $request->representative == '1' ? true : false
+            ]
+        );
 
         return redirect()->route('documents.index')
             ->with('success', 'Document updated successfully');

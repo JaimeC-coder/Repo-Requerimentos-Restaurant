@@ -20,7 +20,7 @@ class Document extends Model
 {
 
     static $rules = [
-		'name' => 'required',
+		'name' => 'required'
     ];
 
     protected $perPage = 10;
@@ -30,7 +30,7 @@ class Document extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name','representative'];
 
 
     /**

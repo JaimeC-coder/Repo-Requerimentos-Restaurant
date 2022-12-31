@@ -13,7 +13,7 @@
                 <label class="mr-2">
                     {!! Form::radio('document_id', $document->id, null, [
                         'class' => 'form-control',
-                        'id' => 'document__' . $document->name,
+                        'id' => 'document__' . $document->representative,
                     ]) !!}
                     {{ $document->name }}
                 </label>
@@ -56,18 +56,16 @@
 
 @section('js')
     <script>
+
         $(document).ready(function() {
+            $('input[type=radio]').change(function() {
+                if ($(this).attr('id') == 'document__1'){
 
-            //$('input[type=radio][name=document__*]').change(function() {
-                //console.log(this.value);
-                // if (this.value == 2) {
-                //     $("#representative").show();
-                // } else {
-                //     $("#representative").hide();
-                // }
-           // });
-
-
+                    $('#representative').removeAttr('hidden');
+                }else{
+                    $('#representative').attr('hidden', 'hidden');
+                }
+            });
         });
     </script>
 @endsection

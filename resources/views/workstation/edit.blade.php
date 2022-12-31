@@ -1,6 +1,7 @@
-@extends('adminlte::page')
+@extends('layouts.app')
+
 @section('template_title')
-    Update Document
+    Update Workstation
 @endsection
 
 @section('content')
@@ -12,18 +13,16 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Update Document</span>
+                        <span class="card-title">Update Workstation</span>
                     </div>
                     <div class="card-body">
-                        {!! Form::model($document, ['route' => ['documents.update', $document], 'method' => 'PUT']) !!}
+                        <form method="POST" action="{{ route('workstations.update', $workstation->id) }}"  role="form" enctype="multipart/form-data">
+                            {{ method_field('PATCH') }}
+                            @csrf
 
-                        @include('documents.form')
-                        {!! Form::close() !!}
+                            @include('workstation.form')
 
-
-
-
-                      
+                        </form>
                     </div>
                 </div>
             </div>

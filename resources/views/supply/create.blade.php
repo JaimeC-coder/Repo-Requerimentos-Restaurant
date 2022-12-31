@@ -1,29 +1,27 @@
-@extends('adminlte::page')
+@extends('layouts.app')
+
 @section('template_title')
-    Update Document
+    Create Supply
 @endsection
 
 @section('content')
     <section class="content container-fluid">
-        <div class="">
+        <div class="row">
             <div class="col-md-12">
 
                 @includeif('partials.errors')
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Update Document</span>
+                        <span class="card-title">Create Supply</span>
                     </div>
                     <div class="card-body">
-                        {!! Form::model($document, ['route' => ['documents.update', $document], 'method' => 'PUT']) !!}
+                        <form method="POST" action="{{ route('supplies.store') }}"  role="form" enctype="multipart/form-data">
+                            @csrf
 
-                        @include('documents.form')
-                        {!! Form::close() !!}
+                            @include('supply.form')
 
-
-
-
-                      
+                        </form>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
-@extends('adminlte::page')
+@extends('layouts.app')
+
 @section('template_title')
-    {{ $document->name ?? 'Show Document' }}
+    {{ $workstation->name ?? 'Show Workstation' }}
 @endsection
 
 @section('content')
@@ -10,26 +11,18 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Show Document</span>
+                            <span class="card-title">Show Workstation</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('documents.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('workstations.index') }}"> Back</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-
+                        
                         <div class="form-group">
                             <strong>Name:</strong>
-                            {{ $document->name }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Representative:</strong>
-                            @if ($document->representative == 1)
-                               Yes
-                            @else
-                                No
-                            @endif
+                            {{ $workstation->name }}
                         </div>
 
                     </div>

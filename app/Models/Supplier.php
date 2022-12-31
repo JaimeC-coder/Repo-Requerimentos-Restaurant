@@ -25,11 +25,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Supplier extends Model
 {
-    
+
     static $rules = [
 		'name' => 'required',
 		'document' => 'required',
-		'representative' => 'required',
+		//'representative' => 'required',
 		'address' => 'required',
 		'phone' => 'required',
 		'email' => 'required',
@@ -53,7 +53,7 @@ class Supplier extends Model
     {
         return $this->hasOne('App\Models\Document', 'id', 'document_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -61,6 +61,6 @@ class Supplier extends Model
     {
         return $this->hasMany('App\Models\Supply', 'supplier_id', 'id');
     }
-    
+
 
 }
