@@ -55,7 +55,6 @@ class TableController extends Controller
                 [
                     'name' => 'Mesa ' . $i,
                     'status' => 'available',
-
                 ]
             );
         }
@@ -63,7 +62,7 @@ class TableController extends Controller
             ->with('success', 'Table created successfully.');
 
 
-       
+
     }
 
     /**
@@ -75,7 +74,6 @@ class TableController extends Controller
     public function show($id)
     {
         $table = Table::find($id);
-
         return view('table.show', compact('table'));
     }
 

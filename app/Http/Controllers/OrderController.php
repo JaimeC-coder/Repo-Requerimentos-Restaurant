@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\Order;
+use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class OrderController
@@ -31,9 +34,23 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $order = new Order();
-        return view('order.create', compact('order'));
+
+        return redirect()->route('orders.index')
+            ->with('success', 'table not selected');
     }
+
+
+    public function createT($id)
+    {
+
+        $employee = Employee::find(Auth::user()->id);
+
+        $table = Table::find($id);
+
+        return view('order.create', compact('table','employee'));
+    }
+
+
 
     /**
      * Store a newly created resource in storage.

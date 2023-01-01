@@ -43,6 +43,7 @@ Route::middleware([
     Route::resource('elaborations', ElaborationController::class)->names('elaborations');
     Route::resource('clients', ClientController::class)->names('clients');
     Route::resource('orders', OrderController::class)->names('orders');
+    Route::get('orders/create/table/{id}', [OrderController::class, 'createT'])->name('orders.create.table');
     Route::resource('suppliers', SupplierController::class)->names('suppliers');
     Route::resource('employees', EmployeeController::class)->names('employees');
 });

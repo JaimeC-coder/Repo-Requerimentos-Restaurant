@@ -34,7 +34,7 @@
                         <div class="row row-cols-1 row-cols-md-3">
                             @foreach ($tables as $table)
                                 {{-- boton para editar mesas --}}
-                                <a href="{{ route('tables.edit', $table->id) }}">
+                                <a href="{{ route('orders.create.table', $table->id) }}">
 
                                     <div class="col mb-auto text-center">
                                         <div
