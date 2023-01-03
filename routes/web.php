@@ -52,7 +52,7 @@ Route::middleware([
     Route::get('orders/create/table/{id}', [OrderController::class, 'createT'])->name('orders.create.table');
     Route::get('reservations/buscarXDNI/{dni}', [ReservationController::class, 'buscarXDNI'])->name('reservations.buscarXDNI');
     Route::get('orders/create/products/{product}', [OrderController::class, 'buscarProduct'])->name('order.buscarProduct');
-    Route::get('/supplies/{id}', [SupplyController::class, 'getSupply'])->name('supplies.getSupply');
+    Route::get('/supplies/{id}/elaboration', [SupplyController::class, 'getSupply'])->name('supplies.getSupply.elaboration');
     Route::get('/supplies/{id}/edit', [SupplyController::class, 'editSupply'])->name('supplies.editSupply');
 
 });

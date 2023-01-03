@@ -217,7 +217,7 @@ Create Elaboration
 
   function addSupplies(id) {
     $.ajax({
-      url: "{{ route('supplies.getSupply', 'id') }}".replace('id', id),
+      url: "{{ route('supplies.getSupply.elaboration', 'id') }}".replace('id', id),
       type: 'GET',
       success: function(data) {
         console.log(data);
