@@ -75,7 +75,12 @@ class ElaborationController extends Controller
                     'quantity' => $insumo_cantidad[$i]
                 ]
             );
+
+            $supply = Supply::find($insumo_id[$i])->decrement('stock', $insumo_cantidad[$i]);
+
         }
+
+
         return redirect()->route('elaborations.index')
             ->with('success', 'Elaboration created successfully.');
     }
