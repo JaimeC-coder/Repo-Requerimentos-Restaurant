@@ -46,5 +46,8 @@ Route::middleware([
     Route::get('orders/create/table/{id}', [OrderController::class, 'createT'])->name('orders.create.table');
     Route::resource('suppliers', SupplierController::class)->names('suppliers');
     Route::resource('employees', EmployeeController::class)->names('employees');
+    Route::resource('reservations', ReservationController::class)->names('reservations');
+    Route::get('reservations/buscarXDNI/{dni}', [ReservationController::class, 'buscarXDNI'])->name('reservations.buscarXDNI');
+    Route::get('/supplies/{id}', [SupplyController::class, 'getSupply'])->name('supplies.getSupply');
 });
 //reservation.buscarXDNI
