@@ -55,6 +55,7 @@ class TableController extends Controller
                 [
                     'name' => 'Mesa ' . $i,
                     'status' => 'available',
+                    'capacity' => 0
                 ]
             );
         }

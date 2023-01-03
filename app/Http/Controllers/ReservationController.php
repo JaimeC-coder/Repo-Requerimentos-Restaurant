@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Models\Table;
+use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class ReservationController
@@ -30,9 +33,21 @@ class ReservationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
+    { //que me devuelva las mesas disponibles que tengan capacidad mayor a 0 y lo guarde en la variable $tables y me devuelva nombre y id
+        $tables = Table::where('status', 'available')->where('capacity', '>', 0)->get();
+        $clients = Client::all();
+
+
+
+        //return $tables;
+        return view('reservation.create', compact('tables', 'clients'));
+    }
+    public function buscarXDNI($dni)
     {
-        $reservation = new Reservation();
-        return view('reservation.create', compact('reservation'));
+        //like %$dni%
+        $client = Client::where('dni', 'like', '%' . $dni )->first();
+        //$client = Client::where('dni', $dni)->first();
+        return $client;
     }
 
     /**
@@ -43,9 +58,41 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
+          
         request()->validate(Reservation::$rules);
 
-        $reservation = Reservation::create($request->all());
+
+        DB::transaction(function () use ($request){
+            $client = Client::firstOrCreate(
+                [
+                    'DNI' => $request->DNI,
+                    'name' => $request->name
+                ],
+                [
+                    'DNI' => $request->DNI,
+                    'name' => $request->name,
+
+                ]
+            );
+            $reservation = Reservation::create(
+
+                [
+                    'date' => $request->date,
+                    'time' => $request->time,
+                    'client_id' => $client->id,
+                    'table_id' => $request->table_id,
+
+                ]
+            );
+            $reservation->table()->update([
+                'status' => 'reserved',
+
+            ]);
+
+
+        });
+
+
 
         return redirect()->route('reservations.index')
             ->with('success', 'Reservation created successfully.');
@@ -74,7 +121,17 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::find($id);
 
-        return view('reservation.edit', compact('reservation'));
+
+        $tables = Table::where('status', 'available')->where('capacity', '>', 0)->orWhere('id', $reservation->table_id)->get();
+
+
+
+        $clients = Client::where('id', $reservation->client_id)->get();
+        return $clients;
+
+
+        return view('reservation.edit', compact('reservation',
+            'tables', 'clients'));
     }
 
     /**

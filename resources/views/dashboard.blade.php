@@ -11,10 +11,19 @@
 
 <h1>Nota</h1>
 <h1>
-falta lo que es preparacion,categoria,clientes,detalle de preparacion,detalle del pedido ,elaboracion,empleados,image,orde,producto,reservacion,proveedor,producto,tag,estado del trabajador
+categoria,
 
-Modificar lo que son mesas para indicar la cantidad de sillas disponibles
-y en la orden borrarel dato del cliente 
+detalle del pedido ,
+image,
+orde,
+producto,
+reservacion,
+producto,
+tag,
+estado del trabajador
+
+
+
 </h1>
 @stop
 

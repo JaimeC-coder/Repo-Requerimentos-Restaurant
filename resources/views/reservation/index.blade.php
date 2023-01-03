@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('template_title')
     Reservation
@@ -35,11 +35,11 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Date</th>
 										<th>Time</th>
-										<th>Client Id</th>
-										<th>Table Id</th>
+										<th>Client</th>
+										<th>Table</th>
 
                                         <th></th>
                                     </tr>
@@ -48,11 +48,11 @@
                                     @foreach ($reservations as $reservation)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $reservation->date }}</td>
 											<td>{{ $reservation->time }}</td>
-											<td>{{ $reservation->client_id }}</td>
-											<td>{{ $reservation->table_id }}</td>
+											<td>{{ $reservation->client()->first()->name }}</td>
+											<td>{{ $reservation->table()->first()->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('reservations.destroy',$reservation->id) }}" method="POST">

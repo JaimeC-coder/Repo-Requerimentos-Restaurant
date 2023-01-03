@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('status', ['available', 'reserved','busy'])->default('available');
+            $table->integer('capacity');
             $table->timestamps();
         });
     }

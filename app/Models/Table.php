@@ -20,10 +20,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Table extends Model
 {
-    
+
     static $rules = [
 		'name' => 'required',
 		'status' => 'required',
+        'capacity' => 'required'
     ];
 
     protected $perPage = 20;
@@ -33,7 +34,7 @@ class Table extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','status'];
+    protected $fillable = ['name','status','capacity'];
 
 
     /**
@@ -43,7 +44,7 @@ class Table extends Model
     {
         return $this->hasMany('App\Models\Order', 'table_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -51,6 +52,6 @@ class Table extends Model
     {
         return $this->hasMany('App\Models\Reservation', 'table_id', 'id');
     }
-    
+
 
 }

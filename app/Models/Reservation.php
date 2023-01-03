@@ -22,11 +22,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Reservation extends Model
 {
-    
+
     static $rules = [
 		'date' => 'required',
 		'time' => 'required',
-		'client_id' => 'required',
+		//'client_id' => 'required',
 		'table_id' => 'required',
     ];
 
@@ -47,7 +47,7 @@ class Reservation extends Model
     {
         return $this->hasOne('App\Models\Client', 'id', 'client_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -55,6 +55,6 @@ class Reservation extends Model
     {
         return $this->hasOne('App\Models\Table', 'id', 'table_id');
     }
-    
+
 
 }

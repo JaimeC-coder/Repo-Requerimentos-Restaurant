@@ -1,11 +1,6 @@
 <?php
 
-use App\Models\Client;
-//convertir un numero en una cadena
-$aux = "count(Client::all())";
 
-
-//$clients ='count(Client::all())';
 
 
 return [
@@ -262,7 +257,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -359,6 +354,12 @@ return [
                 ],
 
             ],
+        ],
+        [
+            'text'    => 'Reservations',
+            'icon'    => 'fas fa-calendar-alt',
+            'route'  => 'reservations.index',
+
         ],
         ['header' => 'Oters'],
         [

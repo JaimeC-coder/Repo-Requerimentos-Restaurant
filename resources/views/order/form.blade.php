@@ -18,11 +18,11 @@
             {{ Form::text('', $employee->user()->first()->name, ['class' => 'form-control' . ($errors->has('employee_id') ? ' is-invalid' : ''), 'placeholder' => 'Employee Id','disabled']) }}
             {!! $errors->first('employee_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             {{ Form::label('client_id') }}
             {{ Form::text('client_id', null, ['class' => 'form-control' . ($errors->has('client_id') ? ' is-invalid' : ''), 'placeholder' => 'Client Id']) }}
             {!! $errors->first('client_id', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+        </div> -->
 
     </div>
     <div class="box-footer mt20">

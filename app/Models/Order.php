@@ -24,12 +24,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Order extends Model
 {
-    
+
     static $rules = [
 		'amount' => 'required',
 		'table_id' => 'required',
 		'employee_id' => 'required',
-		'client_id' => 'required',
+		//'client_id' => 'required',
     ];
 
     protected $perPage = 20;
@@ -49,7 +49,7 @@ class Order extends Model
     {
         return $this->hasOne('App\Models\Client', 'id', 'client_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -57,7 +57,7 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\DetailOrder', 'order_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -65,7 +65,7 @@ class Order extends Model
     {
         return $this->hasOne('App\Models\Employee', 'id', 'employee_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -73,6 +73,6 @@ class Order extends Model
     {
         return $this->hasOne('App\Models\Table', 'id', 'table_id');
     }
-    
+
 
 }

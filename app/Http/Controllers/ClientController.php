@@ -15,6 +15,9 @@ class ClientController extends Controller
     public function index()
     {
         //
+        $clients =Client::paginate();
+        return view('client.index',compact('clients')) ->with('i', (request()->input('page', 1) - 1) * $clients->perPage());;
+
     }
 
     /**

@@ -31,24 +31,50 @@
                     @endif
 
                     <div class="card-body">
-                        <div class="row row-cols-1 row-cols-md-3">
+                        <div class="row  row-cols-md-3">
                             @foreach ($tables as $table)
                                 {{-- boton para editar mesas --}}
-                                <a href="{{ route('orders.create.table', $table->id) }}">
 
-                                    <div class="col mb-auto text-center">
-                                        <div
-                                            class="card @if ($table->status == 'available') text-color-white bg-success @else text-color-white bg-danger @endif">
-                                            <div class="" style="width: 100% ; height: 50px; font-size: 50px ">
+
+                                <div class="col mb-auto text-center">
+                                    <div
+                                        class="card
+                                        @if($table->capacity == 0) text-color-white bg-danger
+                                        @elseif($table->status == 'available') text-color-white bg-success
+                                        @elseif($table->status == 'reserved') text-color-white bg-warning
+                                        @else text-color-white bg-danger
+                                        @endif">
+
+                                        <a href="
+                                        @if ($table->capacity != 0)
+                                        {{ route('orders.create.table', $table->id) }}
+                                        @endif">
+                                        <div class="" style="width: 100% ; height: 50px; font-size: 50px ">
                                                 <i class="fas fa-utensils"></i>
                                             </div>
                                             <div class="card-body">
-                                                <h5 class="  font-weight-bold text-uppercase">{{ $table->name }}</h5>
+                                                <h5 class="font-weight-bold text-uppercase  ">{{ $table->name }}</h5>
+                                                <p>Number of chairs : {{ $table->capacity }}</p>
+                                                @if ($table->capacity == 0)
+                                                <span>update the number of chairs</span>
+                                                @else
+                                                <span> </span>
+
+                                                @endif
 
                                             </div>
+                                        </a>
+                                        <div class="card-footer text-muted">
+                                            <a href="{{ route('tables.edit', $table->id) }}"
+                                                class="btn btn-primary btn-sm float-center" >
+
+                                                <i class="fas fa-edit"></i>
+
+                                            </a>
                                         </div>
                                     </div>
-                                </a>
+
+                                </div>
                             @endforeach
 
                         </div>
