@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Elaboration;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Supply;
+use App\Models\Employee;
+use App\Models\DetailElaboration;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 /**
  * Class ElaborationController
@@ -32,7 +39,13 @@ class ElaborationController extends Controller
     public function create()
     {
         $elaboration = new Elaboration();
-        return view('elaboration.create', compact('elaboration'));
+        $employee = Employee::find(Auth::user()->id);
+
+        $products = Product::all()->where('prepared', 0);
+        $supplies = Supply::all()->where('stock', '>', 0);
+
+
+        return view('elaboration.create', compact('elaboration', 'products', 'supplies'));
     }
 
     /**
@@ -43,10 +56,26 @@ class ElaborationController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Elaboration::$rules);
-
-        $elaboration = Elaboration::create($request->all());
-
+        // return $request;
+        $insumo_cantidad = $request->insumo_cantidad;
+        $insumo_id = $request->insumo_id;
+        // return $supplies_id;
+        $elaboration = Elaboration::create(
+            [
+                'product_id' => $request->products,
+                'employee_id' => DB::table('employees')->where('user_id', Auth::user()->id)->first()->id,
+                'cuantity' => $request->cuantity
+            ]
+        );
+        for ($i = 0; $i < count($insumo_id); $i++) {
+            DetailElaboration::create(
+                [
+                    'elaboration_id' => $elaboration->id,
+                    'supply_id' => $insumo_id[$i],
+                    'quantity' => $insumo_cantidad[$i]
+                ]
+            );
+        }
         return redirect()->route('elaborations.index')
             ->with('success', 'Elaboration created successfully.');
     }

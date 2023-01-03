@@ -10,6 +10,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\ElaborationController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\SupplyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,4 +46,5 @@ Route::middleware([
     Route::resource('orders', OrderController::class)->names('orders');
     Route::resource('suppliers', SupplierController::class)->names('suppliers');
     Route::resource('employees', EmployeeController::class)->names('employees');
+    Route::get('/supplies/{id}', [SupplyController::class, 'getSupply'])->name('supplies.getSupply');
 });
