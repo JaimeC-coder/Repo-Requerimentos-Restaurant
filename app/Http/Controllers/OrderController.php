@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Order;
 use App\Models\Table;
+use App\Models\Product;
+use App\Models\DetailOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class OrderController
@@ -35,6 +38,7 @@ class OrderController extends Controller
     public function create()
     {
 
+
         return redirect()->route('orders.index')
             ->with('success', 'table not selected');
     }
@@ -43,13 +47,20 @@ class OrderController extends Controller
     public function createT($id)
     {
 
+        $products = Product::all();
         $employee = Employee::find(Auth::user()->id);
 
         $table = Table::find($id);
 
-        return view('order.create', compact('table','employee'));
+        return view('order.create', compact('table','employee','products'));
     }
 
+    public function buscarProduct($id)
+    {
+
+        $product = Product::find($id);
+        return $product;
+    }
 
 
     /**
@@ -60,9 +71,34 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+
         request()->validate(Order::$rules);
 
-        $order = Order::create($request->all());
+        DB::transaction(function () use ($request){
+            $order = Order::create([
+                'amount' => $request->amount,
+                'table_id' => $request->table_id,
+                'employee_id' => $request->employee_id,
+
+            ]);
+            for ($i=0; $i < sizeof($request->list_productos) ; $i++) {
+                DetailOrder::create([
+                    'order_id' => $order->id,
+                    'product_id' => $request->list_productos[$i],
+                    'quantity' => $request->list_quantity[$i],
+                    'price' => $request->list_precios[$i],
+                ]);
+            }
+
+            $order->table()->update([
+                'status' => 'reserved',
+
+            ]);
+
+
+        });
+
+
 
         return redirect()->route('orders.index')
             ->with('success', 'Order created successfully.');

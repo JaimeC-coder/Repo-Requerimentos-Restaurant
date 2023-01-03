@@ -31,8 +31,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $category = new Category();
-        return view('category.create', compact('category'));
+        $categories = Category::pluck('name', 'id');
+
+        return view('category.create', compact('categories'));
     }
 
     /**
@@ -72,9 +73,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $categories = Category::pluck('name', 'id');
+
         $category = Category::find($id);
 
-        return view('category.edit', compact('category'));
+        return view('category.edit', compact('category', 'categories'));
     }
 
     /**

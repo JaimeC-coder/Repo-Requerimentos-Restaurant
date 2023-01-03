@@ -45,11 +45,15 @@ Route::middleware([
     Route::resource('elaborations', ElaborationController::class)->names('elaborations');
     Route::resource('clients', ClientController::class)->names('clients');
     Route::resource('orders', OrderController::class)->names('orders');
-    Route::get('orders/create/table/{id}', [OrderController::class, 'createT'])->name('orders.create.table');
     Route::resource('suppliers', SupplierController::class)->names('suppliers');
     Route::resource('employees', EmployeeController::class)->names('employees');
     Route::resource('reservations', ReservationController::class)->names('reservations');
+    Route::resource('supplies', SupplyController::class)->names('supplies');
+    Route::get('orders/create/table/{id}', [OrderController::class, 'createT'])->name('orders.create.table');
     Route::get('reservations/buscarXDNI/{dni}', [ReservationController::class, 'buscarXDNI'])->name('reservations.buscarXDNI');
+    Route::get('orders/create/products/{product}', [OrderController::class, 'buscarProduct'])->name('order.buscarProduct');
     Route::get('/supplies/{id}', [SupplyController::class, 'getSupply'])->name('supplies.getSupply');
+    Route::get('/supplies/{id}/edit', [SupplyController::class, 'editSupply'])->name('supplies.editSupply');
+
 });
 //reservation.buscarXDNI

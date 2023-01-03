@@ -352,6 +352,10 @@ return [
                     'text'    => 'Elaborations',
                     'route'     => 'elaborations.index',
                 ],
+                [
+                    'text'    => 'Supplies',
+                    'route'     => 'supplies.index',
+                ]
 
             ],
         ],

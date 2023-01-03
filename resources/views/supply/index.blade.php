@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('adminlte::page')
 @section('template_title')
     Supply
 @endsection
@@ -35,7 +34,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Name</th>
 										<th>Stock</th>
 										<th>Supplier Id</th>
@@ -47,10 +46,10 @@
                                     @foreach ($supplies as $supply)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $supply->name }}</td>
 											<td>{{ $supply->stock }}</td>
-											<td>{{ $supply->supplier_id }}</td>
+											<td>{{ $supply->supplier()->first()->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('supplies.destroy',$supply->id) }}" method="POST">

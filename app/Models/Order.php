@@ -39,7 +39,7 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['amount','table_id','employee_id','client_id'];
+    protected $fillable = ['amount','table_id','employee_id'];
 
 
     /**

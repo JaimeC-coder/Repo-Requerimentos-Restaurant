@@ -26,15 +26,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
-    
+
     static $rules = [
 		'name' => 'required',
 		'description' => 'required',
 		'price' => 'required',
 		'stock' => 'required',
 		'status' => 'required',
-		'category_id' => 'required',
+        'prepared' => 'required',
+		//'category_id' => 'required',
     ];
+
 
     protected $perPage = 20;
 
@@ -43,7 +45,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','description','price','stock','status','category_id'];
+    protected $fillable = ['name','description','price','stock','status','prepared','category_id'];
 
 
     /**
@@ -53,7 +55,7 @@ class Product extends Model
     {
         return $this->hasOne('App\Models\Category', 'id', 'category_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -61,7 +63,7 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\DetailOrder', 'product_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -69,7 +71,7 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\Elaboration', 'product_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -77,6 +79,6 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\ProductTag', 'product_id', 'id');
     }
-    
+
 
 }

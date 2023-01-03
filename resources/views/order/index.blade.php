@@ -37,9 +37,8 @@
                                         <th>No</th>
 
 										<th>Amount</th>
-										<th>Table Id</th>
-										<th>Employee Id</th>
-										<th>Client Id</th>
+										<th>Employee</th>
+										<th>Client </th>
 
                                         <th></th>
                                     </tr>
@@ -50,8 +49,8 @@
                                             <td>{{ ++$i }}</td>
 
 											<td>{{ $order->amount }}</td>
-											<td>{{ $order->table_id }}</td>
-											<td>{{ $order->employee_id }}</td>
+											<td>{{ $order->table()->first()->name }}</td>
+											<td>{{ $order->employee->user()->first()->name }}</td>
 											<td>{{ $order->client_id }}</td>
 
                                             <td>

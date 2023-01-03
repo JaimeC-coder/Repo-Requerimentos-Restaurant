@@ -20,8 +20,8 @@ return new class extends Migration
             $table->foreign('table_id')->references('id')->on('tables');
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees');
-            $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients')->nullable();
+            //$table->unsignedBigInteger('client_id');
+          //  $table->foreign('client_id')->references('id')->on('clients')->nullable();
             $table->timestamps();
         });
     }

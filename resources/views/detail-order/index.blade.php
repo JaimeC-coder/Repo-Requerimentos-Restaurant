@@ -1,7 +1,7 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('template_title')
-    Product
+    Detail Order
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Product') }}
+                                {{ __('Detail Order') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('detail-orders.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -35,36 +35,29 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-
-										<th>Name</th>
-										<th>Description</th>
+                                        
+										<th>Order Id</th>
+										<th>Product Id</th>
+										<th>Quantity</th>
 										<th>Price</th>
-										<th>Stock</th>
-										<th>Prepared</th>
-
-										<th>Status</th>
-										<th>Category</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($products as $product)
+                                    @foreach ($detailOrders as $detailOrder)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-
-											<td>{{ $product->name }}</td>
-											<td>{{ $product->description }}</td>
-											<td>{{ $product->price }}</td>
-											<td>{{ $product->stock }}</td>
-											<td>{{ $product->prepared }}</td>
-											<td>{{ $product->status }}</td>
-											<td>{{ $product->category()->first()->name }}</td>
+                                            
+											<td>{{ $detailOrder->order_id }}</td>
+											<td>{{ $detailOrder->product_id }}</td>
+											<td>{{ $detailOrder->quantity }}</td>
+											<td>{{ $detailOrder->price }}</td>
 
                                             <td>
-                                                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('products.show',$product->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('products.edit',$product->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                <form action="{{ route('detail-orders.destroy',$detailOrder->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('detail-orders.show',$detailOrder->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('detail-orders.edit',$detailOrder->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
@@ -77,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $products->links() !!}
+                {!! $detailOrders->links() !!}
             </div>
         </div>
     </div>

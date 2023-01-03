@@ -41,7 +41,7 @@ class ElaborationController extends Controller
         $elaboration = new Elaboration();
         $employee = Employee::find(Auth::user()->id);
 
-        $products = Product::all()->where('prepared', 0);
+        $products = Product::all()->where('prepared', 1);
         $supplies = Supply::all()->where('stock', '>', 0);
 
 

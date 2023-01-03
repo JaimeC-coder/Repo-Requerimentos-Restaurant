@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supply;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 /**
@@ -31,8 +32,8 @@ class SupplyController extends Controller
      */
     public function create()
     {
-        $supply = new Supply();
-        return view('supply.create', compact('supply'));
+        $suppliers = Supplier::pluck('name', 'id');
+        return view('supply.create', compact('suppliers'));
     }
 
     /**
@@ -71,10 +72,10 @@ class SupplyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    { $suppliers = Supplier::all();
         $supply = Supply::find($id);
 
-        return view('supply.edit', compact('supply'));
+        return view('supply.edit', compact('supply', 'suppliers'));
     }
 
     /**

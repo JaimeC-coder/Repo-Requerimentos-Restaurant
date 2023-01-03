@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('price');
             $table->string('stock');
+            $table->boolean('prepared')->default(false)->nullable();
             $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

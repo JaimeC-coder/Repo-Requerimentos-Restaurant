@@ -15,6 +15,12 @@ class SupplieController extends Controller
     public function index()
     {
         //
+        $supplies = Supplie::paginate();
+
+        return view('supplie.index', compact('supplies'))
+            ->with('i', (request()->input('page', 1) - 1) * $supplies->perPage());
+
+
     }
 
     /**
@@ -25,6 +31,8 @@ class SupplieController extends Controller
     public function create()
     {
         //
+
+        return view('supplie.create');
     }
 
     /**

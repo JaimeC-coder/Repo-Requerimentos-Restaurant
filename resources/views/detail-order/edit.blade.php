@@ -1,7 +1,7 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('template_title')
-    Update Category
+    Update Detail Order
 @endsection
 
 @section('content')
@@ -13,15 +13,14 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Update Category</span>
+                        <span class="card-title">Update Detail Order</span>
                     </div>
                     <div class="card-body">
-                        {!! Form::model($category,['method' => 'PATCH','route' => ['categories.update', $category->id]]) !!}
+                        <form method="POST" action="{{ route('detail-orders.update', $detailOrder->id) }}"  role="form" enctype="multipart/form-data">
+                            {{ method_field('PATCH') }}
+                            @csrf
 
-
-                            @include('category.form')
-
-                        {!! Form::close() !!}
+                            @include('detail-order.form')
 
                         </form>
                     </div>

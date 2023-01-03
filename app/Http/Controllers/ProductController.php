@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 /**
@@ -19,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate();
-
+        //return $products;
         return view('product.index', compact('products'))
             ->with('i', (request()->input('page', 1) - 1) * $products->perPage());
     }
@@ -31,10 +32,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $product = new Product();
-        return view('product.create', compact('product'));
+        $categories = Category::pluck('name', 'id');
+        return view('product.create', compact('categories'));
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -43,9 +44,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+       // return request()->all() ;
         request()->validate(Product::$rules);
 
-        $product = Product::create($request->all());
+        $product = Product::create(
+            [
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'stock' => $request->stock,
+                'prepared' => $request->prepared =='on'? 1:0,
+                'status' => $request->status ,
+                'category_id' => $request->category_id
+            ]
+            //'representative'=> $request->representative == '1' ? true : false
+        );
 
         return redirect()->route('products.index')
             ->with('success', 'Product created successfully.');
@@ -73,8 +86,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-
-        return view('product.edit', compact('product'));
+        $categories = Category::pluck('name', 'id');
+        return view('product.edit', compact('product', 'categories'));
     }
 
     /**
