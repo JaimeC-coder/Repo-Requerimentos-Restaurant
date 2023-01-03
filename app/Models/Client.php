@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Client extends Model
 {
-    
+
     static $rules = [
 		'DNI' => 'required',
 		'name' => 'required',
@@ -43,7 +43,7 @@ class Client extends Model
     {
         return $this->hasMany('App\Models\Order', 'client_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -51,6 +51,6 @@ class Client extends Model
     {
         return $this->hasMany('App\Models\Reservation', 'client_id', 'id');
     }
-    
+
 
 }

@@ -106,4 +106,15 @@ class SupplyController extends Controller
         return redirect()->route('supplies.index')
             ->with('success', 'Supply deleted successfully');
     }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getSupply($id)
+    {
+        $supply = Supply::find($id);
+
+        return response()->json($supply);
+    }
 }

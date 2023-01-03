@@ -10,10 +10,6 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\ElaborationController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\RolePermissionController;
-use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +46,5 @@ Route::middleware([
     Route::get('orders/create/table/{id}', [OrderController::class, 'createT'])->name('orders.create.table');
     Route::resource('suppliers', SupplierController::class)->names('suppliers');
     Route::resource('employees', EmployeeController::class)->names('employees');
-    Route::resource('reservations', ReservationController::class)->names('reservations');
-    Route::get('reservations/buscarXDNI/{dni}', [ReservationController::class, 'buscarXDNI'])->name('reservations.buscarXDNI');
 });
 //reservation.buscarXDNI

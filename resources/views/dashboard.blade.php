@@ -1,4 +1,3 @@
-
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
@@ -25,6 +24,11 @@ estado del trabajador
 
 
 </h1>
+    <h1>Nota</h1>
+    <h1>
+        falta lo que es preparacion,categoria,clientes,detalle de preparacion,detalle del pedido
+        ,elaboracion,empleados,image,orde,producto,reservacion,proveedor,producto,tag,estado del trabajador
+    </h1>
 @stop
 
 @section('css')
@@ -32,5 +36,7 @@ estado del trabajador
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script>
+        console.log('Hi!');
+    </script>
 @stop
