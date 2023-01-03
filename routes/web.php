@@ -10,6 +10,8 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\ElaborationController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\SupplyController;
 use Illuminate\Support\Facades\Route;
 
 /*
