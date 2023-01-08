@@ -47,7 +47,7 @@ class Order extends Model
      */
     public function client()
     {
-        return $this->hasOne('App\Models\Client', 'id', 'client_id');
+        return $this->hasOne(Client::class, 'id', 'client_id');
     }
 
     /**
@@ -55,7 +55,7 @@ class Order extends Model
      */
     public function detailOrders()
     {
-        return $this->hasMany('App\Models\DetailOrder', 'order_id', 'id');
+        return $this->belongsToMany(DetailOrder::class, 'order_id', 'id');
     }
 
     /**
@@ -63,7 +63,7 @@ class Order extends Model
      */
     public function employee()
     {
-        return $this->hasOne('App\Models\Employee', 'id', 'employee_id');
+        return $this->hasOne(Employee::class, 'id', 'employee_id');
     }
 
     /**
@@ -71,7 +71,7 @@ class Order extends Model
      */
     public function table()
     {
-        return $this->hasOne('App\Models\Table', 'id', 'table_id');
+        return $this->hasOne(Table::class, 'id', 'table_id');
     }
 
 

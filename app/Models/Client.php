@@ -41,7 +41,7 @@ class Client extends Model
      */
     public function orders()
     {
-        return $this->hasMany('App\Models\Order', 'client_id', 'id');
+        return $this->hasMany(Order::class, 'client_id', 'id');
     }
 
     /**
@@ -49,7 +49,7 @@ class Client extends Model
      */
     public function reservations()
     {
-        return $this->hasMany('App\Models\Reservation', 'client_id', 'id');
+        return $this->hasMany(Reservation::class, 'client_id', 'id');
     }
 
 

@@ -67,13 +67,13 @@ class User extends Authenticatable
     //relacion de uno a uno con la tabla employee
     public function employee()
     {
-        return $this->hasOne('App\Models\Employee');
+        return $this->hasOne(Employee::class, 'id', 'employee_id');
     }
 
     public function adminlte_image()
     {
         return 'https://picsum.photos/300/300';
-//este url nos genera imágenes ramdom
+        //este url nos genera imágenes ramdom
     }
     //modificar el nombre de usuario
     public function adminlte_desc()
@@ -90,5 +90,4 @@ class User extends Authenticatable
     {
         return 'key-test';
     }
-
 }

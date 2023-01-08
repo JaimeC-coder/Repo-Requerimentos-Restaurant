@@ -51,7 +51,7 @@ class Supplier extends Model
      */
     public function document()
     {
-        return $this->hasOne('App\Models\Document', 'id', 'document_id');
+        return $this->hasOne(Document::class, 'id', 'document_id');
     }
 
     /**
@@ -59,7 +59,7 @@ class Supplier extends Model
      */
     public function supplies()
     {
-        return $this->hasMany('App\Models\Supply', 'supplier_id', 'id');
+        return $this->hasMany(Supply::class, 'supplier_id', 'id');
     }
 
 

@@ -47,12 +47,12 @@ class OrderController extends Controller
     public function createT($id)
     {
 
-        $products = Product::all();
+
+ $products = Product::all();
         $employee = Employee::find(Auth::user()->id);
 
         $table = Table::find($id);
-
-        return view('order.create', compact('table','employee','products'));
+        return view('order.create', compact('table', 'employee', 'products'));
     }
 
     public function buscarProduct($id)
@@ -74,14 +74,16 @@ class OrderController extends Controller
 
         request()->validate(Order::$rules);
 
-        DB::transaction(function () use ($request){
+        DB::transaction(function () use ($request) {
             $order = Order::create([
                 'amount' => $request->amount,
                 'table_id' => $request->table_id,
                 'employee_id' => $request->employee_id,
 
             ]);
-            for ($i=0; $i < sizeof($request->list_productos) ; $i++) {
+
+
+            for ($i = 0; $i < sizeof($request->list_productos); $i++) {
                 DetailOrder::create([
                     'order_id' => $order->id,
                     'product_id' => $request->list_productos[$i],
@@ -94,8 +96,6 @@ class OrderController extends Controller
                 'status' => 'reserved',
 
             ]);
-
-
         });
 
 
@@ -123,11 +123,22 @@ class OrderController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
+        $products = Product::all();
+        $employee = Employee::find(Auth::user()->id);
+
+        $table = Table::find($id);
         $order = Order::find($id);
 
-        return view('order.edit', compact('order'));
+        return view('order.edit', compact('order', 'table', 'employee', 'products'));
+    }
+
+    public function listProduct($id)
+    {
+         //devuelve el detalle de la orden mas el nombre del producto con el id de la order
+        $detailOrder = DetailOrder::with('product')->where('order_id', $id)->get();
+        return response()->json($detailOrder);
     }
 
     /**
@@ -137,8 +148,18 @@ class OrderController extends Controller
      * @param  Order $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    // public function update(Request $request, Order $order)
+    // {
+    //     request()->validate(Order::$rules);
+
+    //     $order->update($request->all());
+
+    //     return redirect()->route('orders.index')
+    //         ->with('success', 'Order updated successfully');
+    // }
+    public function update(Request $request, $order)
     {
+         
         request()->validate(Order::$rules);
 
         $order->update($request->all());

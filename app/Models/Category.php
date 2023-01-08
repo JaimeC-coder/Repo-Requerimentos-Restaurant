@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Category extends Model
 {
-    
+
     static $rules = [
 		'name' => 'required',
     ];
@@ -41,17 +41,17 @@ class Category extends Model
      */
     public function categories()
     {
-        return $this->hasMany('App\Models\Category', 'category_id', 'id');
+        return $this->hasMany(Category::class, 'category_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function category()
     {
-        return $this->hasOne('App\Models\Category', 'id', 'category_id');
+        return $this->hasOne(Category::class, 'id', 'category_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -59,6 +59,6 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Product', 'category_id', 'id');
     }
-    
+
 
 }

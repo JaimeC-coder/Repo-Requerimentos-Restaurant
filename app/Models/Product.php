@@ -33,7 +33,7 @@ class Product extends Model
 		'price' => 'required',
 		'stock' => 'required',
 		'status' => 'required',
-        'prepared' => 'required',
+        //'prepared' => 'required',
 		//'category_id' => 'required',
     ];
 
@@ -53,7 +53,7 @@ class Product extends Model
      */
     public function category()
     {
-        return $this->hasOne('App\Models\Category', 'id', 'category_id');
+        return $this->hasOne( Category::class, 'id', 'category_id');
     }
 
     /**
@@ -61,7 +61,7 @@ class Product extends Model
      */
     public function detailOrders()
     {
-        return $this->hasMany('App\Models\DetailOrder', 'product_id', 'id');
+        return $this->hasMany(DetailOrder::class, 'product_id', 'id');
     }
 
     /**
@@ -69,7 +69,7 @@ class Product extends Model
      */
     public function elaborations()
     {
-        return $this->hasMany('App\Models\Elaboration', 'product_id', 'id');
+        return $this->hasMany(Elaboration::class, 'product_id', 'id');
     }
 
     /**
@@ -77,7 +77,7 @@ class Product extends Model
      */
     public function productTags()
     {
-        return $this->hasMany('App\Models\ProductTag', 'product_id', 'id');
+        return $this->hasMany(ProductTag::class, 'product_id', 'id');
     }
 
 

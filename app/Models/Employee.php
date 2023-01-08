@@ -60,7 +60,7 @@ class Employee extends Model
      */
     public function orders()
     {
-        return $this->hasMany('App\Models\Order', 'employee_id', 'id');
+        return $this->hasMany(Order::class, 'employee_id', 'id');
     }
 
     /**
@@ -68,7 +68,7 @@ class Employee extends Model
      */
     public function user()
     {
-        return $this->hasOne('App\Models\User', 'id', 'user_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
 

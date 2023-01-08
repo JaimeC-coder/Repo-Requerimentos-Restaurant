@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DetailOrder extends Model
 {
-    
+
     static $rules = [
 		'order_id' => 'required',
 		'product_id' => 'required',
@@ -45,16 +45,16 @@ class DetailOrder extends Model
      */
     public function order()
     {
-        return $this->hasOne('App\Models\Order', 'id', 'order_id');
+        return $this->belongsToMany(Order::class, 'id', 'order_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function product()
     {
-        return $this->hasOne('App\Models\Product', 'id', 'product_id');
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
-    
+
 
 }

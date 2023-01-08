@@ -14,6 +14,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\DetailElaborationController;
 use Illuminate\Support\Facades\Route;
+use LDAP\Result;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,11 +55,15 @@ Route::middleware([
     Route::get('reservations/buscarXDNI/{dni}', [ReservationController::class, 'buscarXDNI'])->name('reservations.buscarXDNI');
     Route::get('orders/create/products/{product}', [OrderController::class, 'buscarProduct'])->name('order.buscarProduct');
     Route::get('/supplies/{id}/elaboration', [SupplyController::class, 'getSupply'])->name('supplies.getSupply.elaboration');
+    
     Route::get('/supplies/{id}/edit', [SupplyController::class, 'editSupply'])->name('supplies.editSupply');
 
     // UPDATE ELABORATION POST
     Route::post('/elaborations/{id}/update', [ElaborationController::class, 'update'])->name('elaborations.update1');
     Route::get('detail/elaboration/{id}', [DetailElaborationController::class, 'details'])->name('detail.elaboration');
+    // UPDATE order POST
+    Route::get('orders/list/product/{id}', [OrderController::class, 'listProduct'])->name('orders.list.product');
+    Route::post('/orders/{id}/update', [OrderController::class, 'update'])->name('orders.update1');
 
 
 });

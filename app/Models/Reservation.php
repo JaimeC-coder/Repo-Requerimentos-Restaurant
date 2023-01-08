@@ -45,7 +45,7 @@ class Reservation extends Model
      */
     public function client()
     {
-        return $this->hasOne('App\Models\Client', 'id', 'client_id');
+        return $this->hasOne(Client::class, 'id', 'client_id');
     }
 
     /**
@@ -53,7 +53,7 @@ class Reservation extends Model
      */
     public function table()
     {
-        return $this->hasOne('App\Models\Table', 'id', 'table_id');
+        return $this->hasOne(Table::class, 'id', 'table_id');
     }
 
 

@@ -19,12 +19,14 @@ class DetailElaboration extends Model
 
     public function elaboration()
     {
-        return $this->belongsTo(Elaboration::class);
+        //relacion de uno a muchos inversa
+        return $this->belongsTo(Elaboration::class, 'elaboration_id');
     }
 
     public function supply()
     {
-        return $this->belongsTo(Supply::class);
+        //relacion de uno a muchos inversa
+        return $this->belongsTo(Supply::class, 'supply_id');
     }
 
 }

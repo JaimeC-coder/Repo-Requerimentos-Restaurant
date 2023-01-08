@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supply;
-use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 /**
@@ -32,8 +31,8 @@ class SupplyController extends Controller
      */
     public function create()
     {
-        $suppliers = Supplier::pluck('name', 'id');
-        return view('supply.create', compact('suppliers'));
+        $supply = new Supply();
+        return view('supply.create', compact('supply'));
     }
 
     /**
@@ -72,10 +71,10 @@ class SupplyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    { $suppliers = Supplier::all();
+    {
         $supply = Supply::find($id);
 
-        return view('supply.edit', compact('supply', 'suppliers'));
+        return view('supply.edit', compact('supply'));
     }
 
     /**
@@ -107,8 +106,7 @@ class SupplyController extends Controller
         return redirect()->route('supplies.index')
             ->with('success', 'Supply deleted successfully');
     }
-
-    /**
+        /**
      * @param int $id
      * @return \Illuminate\Http\Response
      */

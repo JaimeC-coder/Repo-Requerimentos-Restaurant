@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Tag extends Model
 {
-    
+
     static $rules = [
 		'name' => 'required',
     ];
@@ -38,8 +38,8 @@ class Tag extends Model
      */
     public function productTags()
     {
-        return $this->hasMany('App\Models\ProductTag', 'tag_id', 'id');
+        return $this->hasMany(ProductTag::class, 'tag_id', 'id');
     }
-    
+
 
 }

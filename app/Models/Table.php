@@ -42,7 +42,7 @@ class Table extends Model
      */
     public function orders()
     {
-        return $this->hasMany('App\Models\Order', 'table_id', 'id');
+        return $this->hasMany(Order::class, 'table_id', 'id');
     }
 
     /**
@@ -50,7 +50,7 @@ class Table extends Model
      */
     public function reservations()
     {
-        return $this->hasMany('App\Models\Reservation', 'table_id', 'id');
+        return $this->hasMany(Reservation::class, 'table_id', 'id');
     }
 
 

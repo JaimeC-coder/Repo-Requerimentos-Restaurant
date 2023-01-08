@@ -1,6 +1,7 @@
-@extends('adminlte::page')
+@extends('layouts.app')
+
 @section('template_title')
-    Supply
+    Product Tag
 @endsection
 
 @section('content')
@@ -12,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Supply') }}
+                                {{ __('Product Tag') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('supplies.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('product-tags.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -34,27 +35,25 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-
-										<th>Name</th>
-										<th>Stock</th>
-										<th>Supplier Id</th>
+                                        
+										<th>Product Id</th>
+										<th>Tag Id</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($supplies as $supply)
+                                    @foreach ($productTags as $productTag)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-
-											<td>{{ $supply->name }}</td>
-											<td>{{ $supply->stock }}</td>
-											<td>{{ $supply->supplier_id }}</td>
+                                            
+											<td>{{ $productTag->product_id }}</td>
+											<td>{{ $productTag->tag_id }}</td>
 
                                             <td>
-                                                <form action="{{ route('supplies.destroy',$supply->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('supplies.show',$supply->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('supplies.edit',$supply->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                <form action="{{ route('product-tags.destroy',$productTag->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('product-tags.show',$productTag->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('product-tags.edit',$productTag->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
@@ -67,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $supplies->links() !!}
+                {!! $productTags->links() !!}
             </div>
         </div>
     </div>

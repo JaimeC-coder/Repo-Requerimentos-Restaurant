@@ -38,7 +38,8 @@ class Document extends Model
      */
     public function suppliers()
     {
-        return $this->hasMany('App\Models\Supplier', 'document_id', 'id');
+        //relacion de uno a muchos
+        return $this->hasMany(Supplier::class, 'document_id', 'id');
     }
 
 

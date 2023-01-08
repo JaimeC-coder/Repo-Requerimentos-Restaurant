@@ -56,7 +56,7 @@ class ElaborationController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+       // return $request;
         $insumo_cantidad = $request->insumo_cantidad;
         $insumo_id = $request->insumo_id;
         // return $supplies_id;

@@ -19,3 +19,21 @@ https://www.youtube.com/watch?v=EdZ0hQtrfEU
 
 
 https://www.youtube.com/watch?v=kw72-dm7yNI
+
+modulo de
+ contabilidad,
+ facturacion,
+ inventario,
+ compras,
+ ventas,
+ clientes,
+ proveedores,
+ productos,
+ categorias,
+ subcategorias,
+ usuarios,
+ roles,
+ permisos,
+ reportes,
+ graficas,
+ etc

@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Elaboration extends Model
 {
-    
+
     static $rules = [
 		'cuantity' => 'required',
 		'product_id' => 'required',
@@ -44,24 +44,24 @@ class Elaboration extends Model
      */
     public function detailElaborations()
     {
-        return $this->hasMany('App\Models\DetailElaboration', 'elaboration_id', 'id');
+        return $this->hasMany(DetailElaboration::class, 'elaboration_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function employee()
     {
-        return $this->hasOne('App\Models\Employee', 'id', 'employee_id');
+        return $this->hasOne(Employee::class, 'id', 'employee_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function product()
     {
-        return $this->hasOne('App\Models\Product', 'id', 'product_id');
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
-    
+
 
 }
