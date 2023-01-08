@@ -49,8 +49,8 @@
                                             <td>{{ ++$i }}</td>
 
 											<td>{{ $elaboration->cuantity }}</td>
-											<td>{{ $elaboration->product_id }}</td>
-											<td>{{ $elaboration->employee_id }}</td>
+											<td>{{ $elaboration->product->name }}</td>
+											<td>{{ $elaboration->employee->user->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('elaborations.destroy',$elaboration->id) }}" method="POST">

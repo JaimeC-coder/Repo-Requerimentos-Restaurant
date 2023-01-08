@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DetailElaboration;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class DetailElaborationController extends Controller
 {
     /**
@@ -81,5 +81,15 @@ class DetailElaborationController extends Controller
     public function destroy(DetailElaboration $detailElaboration)
     {
         //
+    }
+
+    public function details($id)
+    {
+        $details = DB::table('detail_elaborations')
+            ->join('supplies', 'detail_elaborations.supply_id', '=', 'supplies.id')
+            ->select('detail_elaborations.*', 'supplies.name')
+            ->where('detail_elaborations.elaboration_id', '=', $id)
+            ->get();
+        return response()->json($details);
     }
 }

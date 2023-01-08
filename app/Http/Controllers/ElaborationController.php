@@ -56,7 +56,7 @@ class ElaborationController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+        return $request;
         $insumo_cantidad = $request->insumo_cantidad;
         $insumo_id = $request->insumo_id;
         // return $supplies_id;
@@ -107,22 +107,49 @@ class ElaborationController extends Controller
     public function edit($id)
     {
         $elaboration = Elaboration::find($id);
-
-        return view('elaboration.edit', compact('elaboration'));
+        $details = DetailElaboration::where('elaboration_id', $id)->get();
+        $products = Product::all()->where('prepared', 1);
+        $supplies = Supply::all()->where('stock', '>', 0);
+        return view('elaboration.edit', compact('elaboration', 'products', 'supplies', 'details'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Elaboration $elaboration
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Elaboration $elaboration)
+    public function update(Request $request, $id)
     {
-        request()->validate(Elaboration::$rules);
+        // return $request;
+        Elaboration::find($id)->update([
+            'product_id' => $request->products,
+            'cuantity' => $request->cuantity
+        ]);
 
-        $elaboration->update($request->all());
+        $details = DetailElaboration::where('elaboration_id', $id)->get();
+        foreach ($details as $detail) {
+            $supply = Supply::find($detail->supply_id)->increment('stock', $detail->quantity);
+        }
+
+        DetailElaboration::where('elaboration_id', $id)->delete();
+
+        $insumo_cantidad = $request->insumo_cantidad;
+        $insumo_id = $request->insumo_id;
+
+        for ($i = 0; $i < count($insumo_id); $i++) {
+            DetailElaboration::create(
+                [
+                    'elaboration_id' => $id,
+                    'supply_id' => $insumo_id[$i],
+                    'quantity' => $insumo_cantidad[$i]
+                ]
+            );
+
+            $supply = Supply::find($insumo_id[$i])->decrement('stock', $insumo_cantidad[$i]);
+
+        }
 
         return redirect()->route('elaborations.index')
             ->with('success', 'Elaboration updated successfully');

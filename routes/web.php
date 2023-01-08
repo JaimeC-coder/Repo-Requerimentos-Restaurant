@@ -12,6 +12,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SupplyController;
+use App\Http\Controllers\DetailElaborationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,6 +55,11 @@ Route::middleware([
     Route::get('orders/create/products/{product}', [OrderController::class, 'buscarProduct'])->name('order.buscarProduct');
     Route::get('/supplies/{id}/elaboration', [SupplyController::class, 'getSupply'])->name('supplies.getSupply.elaboration');
     Route::get('/supplies/{id}/edit', [SupplyController::class, 'editSupply'])->name('supplies.editSupply');
+
+    // UPDATE ELABORATION POST
+    Route::post('/elaborations/{id}/update', [ElaborationController::class, 'update'])->name('elaborations.update1');
+    Route::get('detail/elaboration/{id}', [DetailElaborationController::class, 'details'])->name('detail.elaboration');
+
 
 });
 //reservation.buscarXDNI
