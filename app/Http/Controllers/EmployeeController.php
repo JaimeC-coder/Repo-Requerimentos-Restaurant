@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -33,8 +36,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
+        $roles = Role::pluck('name', 'name')->all();
 
-        return view('employee.create');
+        return view('employee.create', compact('roles'));
     }
 
     /**
@@ -45,29 +49,27 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        //return $request->all();
         request()->validate(
             Employee::$rules
         );
 
-        DB::transaction(function () use ($request){
+        DB::transaction(function () use ($request) {
             $NewUser = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => bcrypt($request->password),
+                'password' =>Crypt::encrypt($request->password),
 
-            ]);
+            ])->assignRole($request->roles);
             $NewUser->employee()->create([
                 'DNI' => $request->DNI,
                 'phone' => $request->phone,
                 'address' =>  $request->address,
                 'city' => $request->city,
             ]);
-
-
         });
         return redirect()->route('employees.index')
             ->with('success', 'Employee created successfully.');
-
     }
 
     /**
@@ -91,9 +93,27 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $employee = Employee::find($id);
+        $employees = Employee::find($id);
 
-        return view('employee.edit', compact('employee'));
+        
+        $roles = Role::pluck('name', 'id');
+        return view('employee.edit', compact('employees', 'roles'));
+    }
+
+    public function getUser($id)
+    {
+        //devuelve el usuario con el id que le pasamos pero con el id del employee
+
+        $user = User::find($id);
+        //Desencriptamos la contraseña encriptada con hash
+        $user->password = Crypt::decrypt($user->password);
+
+
+
+
+
+        return response()->json($user);
+
     }
 
     /**
@@ -107,7 +127,19 @@ class EmployeeController extends Controller
     {
         request()->validate(Employee::$rules);
 
-        $employee->update($request->all());
+        DB::transaction(
+            function () use ($request, $employee) {
+                $employee->update($request->all());
+                $employee->user->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Crypt::encrypt($request->password),
+                ]);
+                $employee->user->syncRoles($request->roles);
+            }
+        );
+
+
 
         return redirect()->route('employees.index')
             ->with('success', 'Employee updated successfully');

@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('template_title')
-    Product Tag
+    Purchase
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Product Tag') }}
+                                {{ __('Purchase') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('product-tags.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('purchases.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -35,25 +35,27 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Product Id</th>
-										<th>Tag Id</th>
+
+										<th>Quantity</th>
+										<th>Supply Id</th>
+										<th>Employee Id</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($productTags as $productTag)
+                                    @foreach ($purchases as $purchase)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $productTag->product_id }}</td>
-											<td>{{ $productTag->tag_id }}</td>
+
+											<td>{{ $purchase->quantity }}</td>
+											<td>{{ $purchase->supply_id }}</td>
+											<td>{{ $purchase->employee_id }}</td>
 
                                             <td>
-                                                <form action="{{ route('product-tags.destroy',$productTag->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('product-tags.show',$productTag->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('product-tags.edit',$productTag->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                <form action="{{ route('purchases.destroy',$purchase->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('purchases.show',$purchase->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('purchases.edit',$purchase->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
@@ -66,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $productTags->links() !!}
+                {!! $purchases->links() !!}
             </div>
         </div>
     </div>

@@ -6,12 +6,15 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    use HasRoles;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -35,7 +38,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
+       // 'password',
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
@@ -67,27 +70,32 @@ class User extends Authenticatable
     //relacion de uno a uno con la tabla employee
     public function employee()
     {
-        return $this->hasOne(Employee::class, 'id', 'employee_id');
+        return $this->hasOne('App\Models\Employee' );
     }
+
 
     public function adminlte_image()
     {
-        return 'https://picsum.photos/300/300';
+        $auth=Auth::user()->profile_photo_url;
+        return $auth;
         //este url nos genera imágenes ramdom
     }
     //modificar el nombre de usuario
     public function adminlte_desc()
     {
-        return 'Administrador';
+       $auth=Auth::user()->id;
+       $user = User::find($auth);
+
+       return strtoupper($user->getRoleNames()->implode(', '));
     }
     //modificar el rol de usuario
-    public function adminlte_profile_url()
-    {
-        return 'profile/username';
-    }
+    // public function adminlte_profile_url()
+    // {
+    //     return 'profile/username';
+    // }
     //modificar el perfil de usuario
-    public function adminlte_header()
-    {
-        return 'key-test';
-    }
+    // public function adminlte_header()
+    // {
+    //     return 'key-test';
+    // }
 }

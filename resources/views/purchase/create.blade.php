@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('template_title')
-    Create Workstation
+    Create Purchase
 @endsection
 
 @section('content')
@@ -13,13 +13,13 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Create Workstation</span>
+                        <span class="card-title">Create Purchase</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('workstations.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('purchases.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('workstation.form')
+                            @include('purchase.form')
 
                         </form>
                     </div>

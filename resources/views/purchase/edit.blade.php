@@ -1,25 +1,26 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('template_title')
-    Create Detail Order
+    Update Purchase
 @endsection
 
 @section('content')
     <section class="content container-fluid">
-        <div class="row">
+        <div class="">
             <div class="col-md-12">
 
                 @includeif('partials.errors')
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Create Detail Order</span>
+                        <span class="card-title">Update Purchase</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('detail-orders.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('purchases.update', $purchase->id) }}"  role="form" enctype="multipart/form-data">
+                            {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('detail-order.form')
+                            @include('purchase.form')
 
                         </form>
                     </div>

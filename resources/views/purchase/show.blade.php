@@ -1,7 +1,6 @@
-@extends('layouts.app')
-
+@extends('adminlte::page')
 @section('template_title')
-    {{ $detailOrder->name ?? 'Show Detail Order' }}
+    {{ $purchase->name ?? 'Show Purchase' }}
 @endsection
 
 @section('content')
@@ -11,30 +10,26 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Show Detail Order</span>
+                            <span class="card-title">Show Purchase</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('detail-orders.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('purchases.index') }}"> Back</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
-                        <div class="form-group">
-                            <strong>Order Id:</strong>
-                            {{ $detailOrder->order_id }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Product Id:</strong>
-                            {{ $detailOrder->product_id }}
-                        </div>
+
                         <div class="form-group">
                             <strong>Quantity:</strong>
-                            {{ $detailOrder->quantity }}
+                            {{ $purchase->quantity }}
                         </div>
                         <div class="form-group">
-                            <strong>Price:</strong>
-                            {{ $detailOrder->price }}
+                            <strong>Supply Id:</strong>
+                            {{ $purchase->supply_id }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Employee Id:</strong>
+                            {{ $purchase->employee_id }}
                         </div>
 
                     </div>

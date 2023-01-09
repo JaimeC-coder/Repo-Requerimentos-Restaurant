@@ -138,7 +138,7 @@ return [
     'usermenu_header_class' => 'bg-dark',
     'usermenu_image' => true,
     'usermenu_desc' => true,
-    'usermenu_profile_url' => true,
+    'usermenu_profile_url' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -257,7 +257,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'dashboard',
+    'dashboard_url' => '',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -303,14 +303,34 @@ return [
         ],
         [
             'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
+            'topnav_right' => FALSE,
         ],
 
         // Sidebar items:
+        ['header' => 'DASHBOARD'],
+        [
+            'text' => 'ADMIN',
+            'route'  => 'dashboard_admin',
+        ],
 
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
+            'text' => 'RECEPTIONIST',
+          'route'  => 'dashboard_receptionist',
+            'can'  => 'manage-blog',
+        ],
+        [
+            'text' => 'WAREHOUSE MANAGER',
+            'route'  => 'dashboard_warehouse_manager',
+            'can'  => 'manage-blog',
+        ],
+        [
+            'text' => 'WAITER',
+            'route'  => 'dashboard_waiter',
+            'can'  => 'manage-blog',
+        ],
+        [
+            'text' => 'COOK',
+            'route'  => 'dashboard_cook',
             'can'  => 'manage-blog',
         ],
         [
@@ -370,6 +390,12 @@ return [
             'text'       => 'supplier',
             'icon' => 'fas fa-truck',
             'route'        => 'suppliers.index',
+        ],
+        [
+            'text'       => 'purchases',
+            'icon' => 'fas fa-shopping-cart',
+            'route'        => 'purchases.index',
+
         ],
         [
             'text'       => 'Documents',

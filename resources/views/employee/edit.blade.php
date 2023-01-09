@@ -15,16 +15,38 @@
                         <span class="card-title">Update Employee</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('employees.update', $employee->id) }}"  role="form" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
-                            @csrf
+                        {{ Form::model($employees, ['route' => ['employees.update', $employees], 'method' => 'PATCH']) }}
+                        {{ method_field('PATCH') }}
+                        @csrf
 
-                            @include('employee.form')
+                        @include('employee.form')
 
-                        </form>
+
+                        {{ Form::close() }}
                     </div>
                 </div>
             </div>
         </div>
     </section>
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+
+            $.ajax({
+                url: "{{ route('employees.getUser','id') }}".replace('id', {{$employees->user_id}}),
+                type: "get",
+                success: function(response) {
+
+                    console.log(response);
+                    $('#name').val(response.name);
+                    $('#email').val(response.email);
+                    $('#password').val(response.password);
+
+
+                }
+            });
+        });
+    </script>
 @endsection

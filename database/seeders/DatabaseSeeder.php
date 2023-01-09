@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,8 +22,8 @@ class DatabaseSeeder extends Seeder
         $admin =User::factory()->create([
             'name' => 'Test User',
             'email' => 'admin@admin.admin',
-            'password' => bcrypt('password'),
-        ]);
+            'password' => Crypt::encrypt('password'),
+        ])->assignRole('admin');
         Employee::create([
             'DNI' => '12345678',
             'phone' => '78955874',
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'paco',
 
         ]);
+        $this->call(RoleSeeder::class);
 
 
 

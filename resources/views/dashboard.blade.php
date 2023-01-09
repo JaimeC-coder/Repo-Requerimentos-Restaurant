@@ -10,17 +10,10 @@
 
 <h1>Nota</h1>
 <h1>
-categoria,
-
-detalle del pedido ,
 image,
-orde,
-producto,
-tag,
-estado del trabajador
 
-
-
+roles - permisos
+orden de compra - detalle orden de compra
 </h1>
 
 @stop

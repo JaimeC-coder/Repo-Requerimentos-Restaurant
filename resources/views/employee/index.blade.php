@@ -40,6 +40,7 @@
 										<th>Phone</th>
 										<th>Address</th>
 										<th>City</th>
+                                        <th>Rol</th>
 
                                         <th></th>
                                     </tr>
@@ -55,9 +56,12 @@
 											<td>{{ $employee->phone }}</td>
 											<td>{{ $employee->address }}</td>
 											<td>{{ $employee->city }}</td>
-											 
-
                                             <td>
+                                                {{ $employee->user->getRoleNames()
+                                                    ->implode(', ') }}
+                                            </td>
+                                            <td>
+
                                                 <form action="{{ route('employees.destroy',$employee->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('employees.show',$employee->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('employees.edit',$employee->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
