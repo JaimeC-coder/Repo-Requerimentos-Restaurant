@@ -311,27 +311,28 @@ return [
         [
             'text' => 'ADMIN',
             'route'  => 'dashboard_admin',
+            'can'  => 'dashboard.admin',
         ],
 
         [
             'text' => 'RECEPTIONIST',
           'route'  => 'dashboard_receptionist',
-            'can'  => 'manage-blog',
+            'can'  => 'dashboard.receptionist',
         ],
         [
             'text' => 'WAREHOUSE MANAGER',
             'route'  => 'dashboard_warehouse_manager',
-            'can'  => 'manage-blog',
+            'can'  => 'dashboard.warehouse',
         ],
         [
             'text' => 'WAITER',
             'route'  => 'dashboard_waiter',
-            'can'  => 'manage-blog',
+            'can'  => 'dashboard.waiter',
         ],
         [
             'text' => 'COOK',
             'route'  => 'dashboard_cook',
-            'can'  => 'manage-blog',
+            'can'  => 'dashboard.cook',
         ],
         [
             'text'        => 'Clients',
@@ -346,11 +347,13 @@ return [
             'text' => 'Tables',
             'route'  => 'tables.index',
             'icon'    => 'fas fa-utensils',
+            'can'  => 'tables.index',
         ],
         [
             'text' => 'Orders',
             'route'  => 'orders.index',
             'icon' => 'fas fa-sticky-note',
+            //'can'  => 'orders.index',
         ],
         [
             'text'    => 'Products',
@@ -359,22 +362,28 @@ return [
                 [
                     'text' => 'Products',
                     'route'  => 'products.index',
+                    'icon'    => 'fas fa-soup',
+                    'can'  => 'products.index',
                 ],
                 [
                     'text'    => 'Categories',
                     'route'     => 'categories.index',
+                    'can'  => 'categories.index',
                 ],
                 [
                     'text' => 'Tags',
                     'route' => 'tags.index',
+                    'can'  => 'tags.index',
                 ],
                 [
                     'text'    => 'Elaborations',
                     'route'     => 'elaborations.index',
+                    'can'  => 'elaborations.index',
                 ],
                 [
                     'text'    => 'Supplies',
                     'route'     => 'supplies.index',
+                    'can'  => 'supplies.index',
                 ]
 
             ],
@@ -383,6 +392,7 @@ return [
             'text'    => 'Reservations',
             'icon'    => 'fas fa-calendar-alt',
             'route'  => 'reservations.index',
+            'can'  => 'reservations.index',
 
         ],
         ['header' => 'Oters'],
@@ -390,22 +400,26 @@ return [
             'text'       => 'supplier',
             'icon' => 'fas fa-truck',
             'route'        => 'suppliers.index',
+            'can'  => 'suppliers.index',
         ],
         [
             'text'       => 'purchases',
             'icon' => 'fas fa-shopping-cart',
             'route'        => 'purchases.index',
+            'can'  => 'purchases.index',
 
         ],
         [
             'text'       => 'Documents',
             'icon' => 'fas fa-id-card',
             'route'        => 'documents.index',
+            'can'  => 'documents.index',
         ],
         [
             'text'       => 'Employees',
             'icon' => 'fas fa-users',
             'route'        => 'employees.index',
+            'can'  => 'employees.index',
         ],
     ],
 

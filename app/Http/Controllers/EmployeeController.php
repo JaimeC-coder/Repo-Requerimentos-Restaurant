@@ -58,7 +58,7 @@ class EmployeeController extends Controller
             $NewUser = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' =>Crypt::encrypt($request->password),
+                'password' =>bcrypt($request->password),
 
             ])->assignRole($request->roles);
             $NewUser->employee()->create([
@@ -95,7 +95,7 @@ class EmployeeController extends Controller
     {
         $employees = Employee::find($id);
 
-        
+
         $roles = Role::pluck('name', 'id');
         return view('employee.edit', compact('employees', 'roles'));
     }
@@ -106,12 +106,7 @@ class EmployeeController extends Controller
 
         $user = User::find($id);
         //Desencriptamos la contraseña encriptada con hash
-        $user->password = Crypt::decrypt($user->password);
-
-
-
-
-
+        $user->password = '***********';
         return response()->json($user);
 
     }
@@ -133,10 +128,11 @@ class EmployeeController extends Controller
                 $employee->user->update([
                     'name' => $request->name,
                     'email' => $request->email,
-                    'password' => Crypt::encrypt($request->password),
+                    'password' => $request->password == '***********' ? $employee->user->password : bcrypt($request->password)
                 ]);
                 $employee->user->syncRoles($request->roles);
             }
+
         );
 
 

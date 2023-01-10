@@ -16,9 +16,12 @@ Document
       </span>
 
       <div class="float-right">
-       <a href="{{ route('documents.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+      @can('documents.create')
+      <a href="{{ route('documents.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
         {{ __('Create New') }}
        </a>
+
+      @endcan
       </div>
      </div>
     </div>
@@ -59,15 +62,21 @@ Document
           @endif
          </td>
          <td>
+            @can('documents.show')
           <a class="btn btn-sm btn-primary " href="{{ route('documents.show', $document) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+         @endcan
+            @can('documents.edit')
+
           <a class="btn btn-sm btn-success" href="{{ route('documents.edit', $document) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
 
+          @endcan
+            @can('documents.delete')
           <form action="{{ route('documents.destroy', $document) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
            @csrf
            @method('DELETE')
            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i> Delete</button>
           </form>
-
+            @endcan
          </td>
         </tr>
         @endforeach

@@ -32,10 +32,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'dashboard.waiter'])->syncRoles([$role4]);
         Permission::create(['name' => 'dashboard.cook'])->syncRoles([$role5]);
         //reservation
-        Permission::create(['name' => 'reservation.create'])->syncRoles([$role1,$role2]);
-        Permission::create(['name' => 'reservation.edit'])->syncRoles([$role1,$role2]);
-        Permission::create(['name' => 'reservation.delete'])->syncRoles([$role1,$role2]);
-        Permission::create(['name' => 'reservation.index'])->syncRoles([$role1,$role2]);
+        Permission::create(['name' => 'reservations.create'])->syncRoles([$role1,$role2]);
+        Permission::create(['name' => 'reservations.edit'])->syncRoles([$role1,$role2]);
+        Permission::create(['name' => 'reservations.delete'])->syncRoles([$role1,$role2]);
+        Permission::create(['name' => 'reservations.index'])->syncRoles([$role1,$role2]);
         //tables
         Permission::create(['name' => 'tables.create'])->syncRoles([$role1]);
         Permission::create(['name' => 'tables.edit'])->syncRoles([$role1,$role2]);
@@ -84,11 +84,11 @@ class RoleSeeder extends Seeder
          Permission::create(['name' => 'orders.index'])->syncRoles([$role1,$role2,$role4,$role5]);
          Permission::create(['name' => 'orders.show'])->syncRoles([$role1,$role2,$role4,$role5]);
         //elaboration -> admin and cook
-        Permission::create(['name'=>'elaboration.index'])->syncRoles([$role1,$role5]);
-        Permission::create(['name'=>'elaboration.show'])->syncRoles([$role1,$role5]);
-        Permission::create(['name'=>'elaboration.create'])->syncRoles([$role1,$role5]);
-        Permission::create(['name'=>'elaboration.edit'])->syncRoles([$role1,$role5]);
-        Permission::create(['name'=>'elaboration.delete'])->syncRoles([$role1]);
+        Permission::create(['name'=>'elaborations.index'])->syncRoles([$role1,$role5]);
+        Permission::create(['name'=>'elaborations.show'])->syncRoles([$role1,$role5]);
+        Permission::create(['name'=>'elaborations.create'])->syncRoles([$role1,$role5]);
+        Permission::create(['name'=>'elaborations.edit'])->syncRoles([$role1,$role5]);
+        Permission::create(['name'=>'elaborations.delete'])->syncRoles([$role1]);
 
         //puchases -> admin and warehouse manager
         Permission::create(['name'=>'purchases.index'])->syncRoles([$role1,$role3]);
@@ -108,7 +108,12 @@ class RoleSeeder extends Seeder
         Permission::create(['name'=>'suppliers.create'])->syncRoles([$role1,$role3]);
         Permission::create(['name'=>'suppliers.edit'])->syncRoles([$role1,$role3]);
         Permission::create(['name'=>'suppliers.delete'])->syncRoles([$role1,$role3]);
-
+//documents
+Permission::create(['name'=>'documents.index'])->syncRoles([$role1,$role2,$role3,$role4,$role5]);
+Permission::create(['name'=>'documents.show'])->syncRoles([$role1,$role2,$role3,$role4,$role5]);
+Permission::create(['name'=>'documents.create'])->syncRoles([$role1,$role2,$role3,$role4,$role5]);
+Permission::create(['name'=>'documents.edit'])->syncRoles([$role1,$role2,$role3,$role4,$role5]);
+Permission::create(['name'=>'documents.delete'])->syncRoles([$role1,$role2,$role3,$role4,$role5]);
 
 
 

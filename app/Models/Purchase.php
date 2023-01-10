@@ -9,23 +9,23 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property $id
  * @property $quantity
- * @property $supply_id
+ * @property $supplier_id
  * @property $employee_id
  * @property $created_at
  * @property $updated_at
  *
  * @property Employee $employee
  * @property PurchaseOrder[] $purchaseOrders
- * @property Supply $supply
+ * @property Supplier $supplier
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Purchase extends Model
 {
-    
+
     static $rules = [
-		'quantity' => 'required',
-		'supply_id' => 'required',
+
+		'supplier_id' => 'required',
 		'employee_id' => 'required',
     ];
 
@@ -36,7 +36,7 @@ class Purchase extends Model
      *
      * @var array
      */
-    protected $fillable = ['quantity','supply_id','employee_id'];
+    protected $fillable = ['supplier_id','employee_id'];
 
 
     /**
@@ -46,7 +46,7 @@ class Purchase extends Model
     {
         return $this->hasOne('App\Models\Employee', 'id', 'employee_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -54,14 +54,14 @@ class Purchase extends Model
     {
         return $this->hasMany('App\Models\PurchaseOrder', 'purchase_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function supply()
+    public function supplier()
     {
-        return $this->hasOne('App\Models\Supply', 'id', 'supply_id');
+        return $this->hasOne('App\Models\Supplier', 'id', 'supplier_id');
     }
-    
+
 
 }

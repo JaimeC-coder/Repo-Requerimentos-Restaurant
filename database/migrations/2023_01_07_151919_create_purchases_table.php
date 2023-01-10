@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->float('quantity');
-            $table->foreignId('supply_id')->constrained('supplies');
+            //$table->float('quantity');
+            //supplier
+            $table->foreignId('supplier_id')->constrained('suppliers');
             $table->foreignId('employee_id')->constrained('employees');
 
             $table->timestamps();

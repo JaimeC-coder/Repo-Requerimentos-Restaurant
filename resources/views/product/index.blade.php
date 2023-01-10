@@ -17,9 +17,11 @@
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                            @can('products.create')
+                            <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
+                            @endcan
                               </div>
                         </div>
                     </div>
@@ -62,13 +64,21 @@
 											<td>{{ $product->category()->first()->name }}</td>
 
                                             <td>
-                                                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('products.show',$product->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('products.edit',$product->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                @can('products.show')
+                                                <a class="btn btn-sm btn-primary " href="{{ route('products.show',$product->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                @endcan
+                                                @can('products.edit')
+                                                <a class="btn btn-sm btn-success" href="{{ route('products.edit',$product->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                @endcan
+                                                @can('products.destroy')
+                                               <form action="{{ route('products.destroy',$product->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
+
+
+                                               @endcan
                                             </td>
                                         </tr>
                                     @endforeach

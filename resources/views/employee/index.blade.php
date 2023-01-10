@@ -16,9 +16,11 @@
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('employees.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                               @can('employees-create')
+                               <a href="{{ route('employees.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
+                               @endcan
                               </div>
                         </div>
                     </div>
@@ -61,14 +63,23 @@
                                                     ->implode(', ') }}
                                             </td>
                                             <td>
+                                                @can('employees.show')
+
+                                                <a class="btn btn-sm btn-primary " href="{{ route('employees.show',$employee->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                @endcan
+                                                @can('employees.edit')
+
+                                                <a class="btn btn-sm btn-success" href="{{ route('employees.edit',$employee->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                @endcan
+                                                @can('employees.delete')
 
                                                 <form action="{{ route('employees.destroy',$employee->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('employees.show',$employee->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('employees.edit',$employee->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
+                                                @endcan
+
                                             </td>
                                         </tr>
                                     @endforeach

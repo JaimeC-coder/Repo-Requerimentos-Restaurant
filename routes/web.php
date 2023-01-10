@@ -16,8 +16,10 @@ use App\Http\Controllers\DetailElaborationController;
 use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use LDAP\Result;
 
 /*
@@ -34,19 +36,24 @@ use LDAP\Result;
 Route::get('/', function () {
     return view('welcome');
 });
-
+//Route::post('/login', [LoginController::class, 'login'])->name('logins');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
 
+
+    Route::get('/dashboard', function () {
         $user = User::find($auth=Auth::user()->id);
-        //return el contralador con ese nombre
-        return view("dashboard/dashboard_".$user->getRoleNames()->implode(', '));
-    });
- 
+        $role = $user->getRoleNames()->implode(', ');
+        if ($role == 'warehouse manager') {
+            return redirect()->route('dashboard_warehouse_manager');
+        }else{
+            return redirect()->route('dashboard_'.$role);
+        }
+    })->name('dashboard');
+
     Route::get('/dashboard/admin', [DashboardController::class, 'admin'])->name('dashboard_admin');
     Route::get('/dashboard/receptionist', [DashboardController::class, 'receptionist'])->name('dashboard_receptionist');
     Route::get('/dashboard/warehouse_manager', [DashboardController::class, 'warehouse_manager'])->name('dashboard_warehouse_manager');
@@ -83,8 +90,8 @@ Route::middleware([
     Route::post('/orders/{id}/update', [OrderController::class, 'update'])->name('orders.update1');
     // UPDATE empleados POST user
     Route::get('/employees/user/{id}', [EmployeeController::class, 'getUser'])->name('employees.getUser');
-
-
-
+    //update purchase
+    Route::get('purchases/list/product/{id}', [PurchaseController::class, 'listSupplier'])->name('purchases.list.supplier');
+    Route::post('/purchases/{id}/update', [PurchaseController::class, 'update'])->name('purchases.update1');
 });
 //reservation.buscarXDNI

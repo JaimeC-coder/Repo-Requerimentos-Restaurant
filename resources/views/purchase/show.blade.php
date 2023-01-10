@@ -1,4 +1,5 @@
 @extends('adminlte::page')
+
 @section('template_title')
     {{ $purchase->name ?? 'Show Purchase' }}
 @endsection
@@ -24,8 +25,8 @@
                             {{ $purchase->quantity }}
                         </div>
                         <div class="form-group">
-                            <strong>Supply Id:</strong>
-                            {{ $purchase->supply_id }}
+                            <strong>Supplier Id:</strong>
+                            {{ $purchase->supplier_id }}
                         </div>
                         <div class="form-group">
                             <strong>Employee Id:</strong>

@@ -17,10 +17,12 @@
                             </span>
 
                             <div class="float-right">
-                                <a href="{{ route('tables.create') }}" class="btn btn-primary btn-sm float-right"
+                               ' @can('tables.create')
+                               <a href="{{ route('tables.create') }}" class="btn btn-primary btn-sm float-right"
                                     data-placement="left">
                                     {{ __('Create Table') }}
                                 </a>
+                                @endcan
                             </div>
                         </div>
                     </div>

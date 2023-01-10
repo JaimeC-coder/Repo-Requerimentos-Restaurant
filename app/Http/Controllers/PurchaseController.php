@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\PurchaseOrder;
+use App\Models\Supplier;
+use Illuminate\Support\Facades\DB;
+use App\Models\Supply;
 use Illuminate\Http\Request;
 
 /**
@@ -31,8 +36,10 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        $purchase = new Purchase();
-        return view('purchase.create', compact('purchase'));
+        $supplier = Supplier::pluck('name', 'id');
+        $products = Supply::all();
+
+        return view('purchase.create', compact('supplier','products'));
     }
 
     /**
@@ -43,12 +50,24 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Purchase::$rules);
-
-        $purchase = Purchase::create($request->all());
+        //equest()->validate(Purchase::$rules);
+//return $request;
+        DB::transaction(function () use ($request) {
+            $purchase = Purchase::create([
+                'employee_id' => $request->employee_id,
+                'supplier_id' => $request->supplier_id,
+            ]);
+            for ($i = 0; $i < sizeof($request->list_productos); $i++) {
+                PurchaseOrder::create([
+                    'purchase_id' => $purchase->id,
+                    'supply_id' => $request->list_productos[$i],
+                    'quantity' => $request->list_quantity[$i],
+                ]);
+            }
+        });
 
         return redirect()->route('purchases.index')
-            ->with('success', 'Purchase created successfully.');
+            ->with('success', 'Purchase updated successfully');
     }
 
     /**
@@ -74,7 +93,19 @@ class PurchaseController extends Controller
     {
         $purchase = Purchase::find($id);
 
-        return view('purchase.edit', compact('purchase'));
+        $supplier = Supplier::pluck('name', 'id');
+        $products = Supply::all();
+
+        return view('purchase.edit', compact('purchase', 'supplier','products'));
+
+
+    }
+    public function listSupplier($id)
+    {
+         //devuelve el detalle de la orden mas el nombre del producto con el id de la order
+
+        $detailOrder = PurchaseOrder::with('supply')->where('purchase_id', $id)->get();
+        return response()->json($detailOrder);
     }
 
     /**

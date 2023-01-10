@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('purchase_id')->constrained('purchases');
             $table->foreignId('supply_id')->constrained('supplies');
+            $table->float('quantity');
             $table->timestamps();
         });
     }

@@ -20,10 +20,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PurchaseOrder extends Model
 {
-    
+
     static $rules = [
 		'purchase_id' => 'required',
 		'supply_id' => 'required',
+        'quantity' => 'required'
     ];
 
     protected $perPage = 20;
@@ -33,7 +34,7 @@ class PurchaseOrder extends Model
      *
      * @var array
      */
-    protected $fillable = ['purchase_id','supply_id'];
+    protected $fillable = ['purchase_id','supply_id','quantity'];
 
 
     /**
@@ -43,7 +44,7 @@ class PurchaseOrder extends Model
     {
         return $this->hasOne('App\Models\Purchase', 'id', 'purchase_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -51,6 +52,6 @@ class PurchaseOrder extends Model
     {
         return $this->hasOne('App\Models\Supply', 'id', 'supply_id');
     }
-    
+
 
 }
